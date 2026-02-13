@@ -1,39 +1,29 @@
+// Image Gaallery Functionality
+document.getElementById("toggleTheme").onclick = () => {
+    document.body.classList.toggle("light");
+};
 
-let slides = document.querySelectorAll(".hero-slider .slide");
-let currentSlide = 0;
+const cards = document.querySelectorAll(".card");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add("show");
+        }
+    });
+}, { threshold: 0.2 });
+cards.forEach(c => observer.observe(c));
 
-function showSlide(index) {
-    slides.forEach((slide, i) => slide.style.display = (i===index) ? "block" : "none");
-}
+const lightbox = document.getElementById("lightbox");
+const lbImg = lightbox.querySelector("img");
 
-showSlide(currentSlide);
-
-setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}, 5000);
-
-document.getElementById("contactForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    
-    let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let subject = document.getElementById("subject").value.trim();
-    let message = document.getElementById("message").value.trim();
-
-    if(name === "" || email === "" || subject === "" || message === ""){
-        alert("Please fill in all fields!");
-        return false;
+cards.forEach(card => {
+    card.onclick = () => {
+        lbImg.src = card.querySelector("img").src;
+        lightbox.style.display = "flex";
     }
-
-    
-    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if(!email.match(emailPattern)){
-        alert("Please enter a valid email address!");
-        return false;
-    }
-
-    alert("Thank you! Your message has been sent.");
-    this.reset();
 });
-
+lightbox.onclick = (e) => {
+    if (e.target === lightbox || e.target.tagName === "SPAN") {
+        lightbox.style.display = "none";
+    }
+};
