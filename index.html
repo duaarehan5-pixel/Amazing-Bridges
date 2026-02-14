@@ -60,11 +60,17 @@
         <a href="#" class="btn">Read More</a>
     </section>
 
+    <div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closePopup()">✖</span>
+    <img src="./assets/amazing.jpg" alt="Popup Ad">
+    <h2>Special Travel Offer</h2>
+    <p>Book now & explore amazing destinations</p>
+    </div>
+    </div>
 
-    <section class="travel-ads">
-        <h3>Plan Your Trip!</h3>
-        <img src="assets/travel-tourism-facebook-cover-banner-template_120329-5857.avif" alt="Travel Banner">
-    </section>
+
+    
 
     <section class="gallery">
         <h2>Photo Gallery</h2>
@@ -87,6 +93,29 @@
         </div>
     </section>
 
+     <script>
+        function openPopup() {
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+// Auto open after 3 seconds
+window.onload = function() {
+  setTimeout(openPopup, 3000);
+};
+
+
+
+
+
+</script>
+
+
+    
+    
     <footer>
         <p>&copy; 2026 Amazing Bridges. All Rights Reserved.</p>
     </footer>
