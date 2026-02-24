@@ -4,32 +4,1309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazing Bridges</title>
+    <title>Explore Bridges</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+
+        --primary: #0f2a44;
+        --primary-dark: #081c30;
+        --primary-light: #d6e4f0;
+
+
+        --accent: #38bdf8;
+
+
+        --text-dark: #0b1624;
+        --text-muted: #5b6b7c;
+        --text-light: #8aa0b6;
+
+
+        --bg-body: #f1f5f9;
+        --bg-white: #ffffff;
+
+
+        --border: #d8e1ea;
+
+
+        --shadow-sm: 0 1px 3px rgba(2, 12, 27, 0.08);
+        --shadow-md: 0 4px 16px rgba(2, 12, 27, 0.12);
+        --shadow-lg: 0 12px 40px rgba(2, 12, 27, 0.16);
+        --shadow-xl: 0 20px 60px rgba(2, 12, 27, 0.22);
+
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
+
+
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+
+    .header {
+        position: relative;
+        background: linear-gradient(135deg, #162b46 0%, #173370 50%, #3b82f6 100%);
+        padding: 100px 24px 120px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 45%);
+        animation: headerFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes headerFloat {
+
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        33% {
+            transform: translate(20px, -20px) rotate(1deg);
+        }
+
+        66% {
+            transform: translate(-15px, 10px) rotate(-1deg);
+        }
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .header-tag {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 16px;
+        letter-spacing: -0.5px;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-subtitle {
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 300;
+        line-height: 1.8;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .header-wave {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .header-wave svg {
+        display: block;
+        width: 100%;
+        height: 60px;
+    }
+
+
+    .search-section {
+        padding: 0 0 20px;
+        margin-top: -30px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .search-wrapper {
+        position: relative;
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background: var(--bg-white);
+        border: 2px solid var(--border);
+        border-radius: 60px;
+        padding: 6px 8px 6px 20px;
+        gap: 8px;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition);
+    }
+
+    .search-bar:focus-within,
+    .search-bar.active {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-lg), 0 0 0 4px var(--primary-light);
+    }
+
+    .search-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--text-light);
+        flex-shrink: 0;
+    }
+
+    .search-bar input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 0.95rem;
+        font-family: 'Inter', sans-serif;
+        color: var(--text-dark);
+        background: transparent;
+        min-width: 0;
+    }
+
+    .search-bar input::placeholder {
+        color: var(--text-light);
+    }
+
+    .filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: var(--transition);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .filter-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .filter-btn:hover {
+        background: var(--primary-dark);
+        transform: scale(1.03);
+    }
+
+    /* Dropdown */
+    .dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--border);
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.98);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+    }
+
+    .dropdown.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    .dropdown-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-light);
+        padding: 10px 14px 6px;
+    }
+
+    .dropdown-list {
+        list-style: none;
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .dropdown-item:hover {
+        background: var(--primary-light);
+    }
+
+    .dropdown-item.selected {
+        background: var(--primary);
+        color: #fff;
+    }
+
+    .dropdown-item.selected small {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .dropdown-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-body);
+        border-radius: var(--radius-sm);
+        flex-shrink: 0;
+    }
+
+    .dropdown-item.selected .dropdown-icon {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .dropdown-item div {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
+
+    .dropdown-item strong {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .dropdown-item small {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+
+    .info-section {
+        padding: 60px 0 40px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+    }
+
+    .info-text h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+        line-height: 1.3;
+    }
+
+    .info-text p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 14px;
+    }
+
+    .info-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .stat-card {
+        background: var(--bg-white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 24px 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: var(--transition);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-light);
+    }
+
+    .stat-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+
+
+    .filter-indicator {
+        padding: 0 0 10px;
+    }
+
+    .filter-indicator-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--primary-light);
+        border: 1px solid #bfdbfe;
+        border-radius: var(--radius-sm);
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--primary-dark);
+    }
+
+    .clear-filter {
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        transition: var(--transition);
+    }
+
+    .clear-filter:hover {
+        background: var(--primary);
+        color: #fff;
+    }
+
+
+    .cards-section {
+        padding: 20px 0 80px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+    }
+
+    .section-header p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 28px;
+    }
+
+    .card {
+        background: var(--bg-white);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateY(24px);
+        animation: cardFadeIn 0.5s ease forwards;
+    }
+
+    .card:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .card:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .card:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    .card:nth-child(4) {
+        animation-delay: 0.2s;
+    }
+
+    .card:nth-child(5) {
+        animation-delay: 0.25s;
+    }
+
+    .card:nth-child(6) {
+        animation-delay: 0.3s;
+    }
+
+    .card:nth-child(7) {
+        animation-delay: 0.35s;
+    }
+
+    .card:nth-child(8) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes cardFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        border-color: transparent;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-image {
+        transform: scale(1.05);
+    }
+
+    .card-image-wrapper {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        color: var(--primary-dark);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 4px 12px;
+        border-radius: 50px;
+    }
+
+    .card-body {
+        padding: 22px 22px 24px;
+    }
+
+    .card-country {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+
+    .card-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .card-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 18px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .read-more-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .read-more-btn:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: scale(1.04);
+    }
+
+    .read-more-btn svg {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.3s ease;
+    }
+
+    .read-more-btn:hover svg {
+        transform: translateX(3px);
+    }
+
+    .card-meta {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        font-weight: 500;
+    }
+
+    .footer {
+        background: var(--text-dark);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 30px 24px;
+        font-size: 0.85rem;
+    }
+
+
+
+    @media (max-width: 900px) {
+        .info-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .info-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .cards-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+    }
+
+
+    @media (max-width: 600px) {
+        .header {
+            padding: 70px 20px 100px;
+        }
+
+        .filter-btn span {
+            display: none;
+        }
+
+        .filter-btn {
+            padding: 10px 14px;
+        }
+
+        .search-bar {
+            padding: 4px 6px 4px 16px;
+        }
+
+        .info-stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .cards-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .card-image {
+            height: 180px;
+        }
+
+        .info-section {
+            padding: 40px 0 20px;
+        }
+
+        .cards-section {
+            padding: 20px 0 50px;
+        }
+
+        .dropdown-item {
+            padding: 10px 12px;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .info-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="assets/images.png" alt="Logo">
-            <h1>Amazing Bridges</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="bridges.html">bridges</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-       <footer>
-        <p>&copy; 2026 Amazing Bridges. All Rights Reserved.</p>
-    </footer>
 
-    <script src="script.js"></script>
+    <header class="header">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <p class="header-tag">Architecture & Engineering</p>
+            <h1 class="header-title">Categories Bridges</h1>
+            <p class="header-subtitle">
+                Bridges are important structures that connect two different places. They help people and vehicles cross
+                rivers, roads, and valleys safely. Bridges make travel easier and save time. They also show human
+                engineering skill and creativity.
+
+            </p>
+        </div>
+
+        <div class="header-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,64 C360,120 1080,0 1440,64 L1440,120 L0,120 Z" fill="#f8fafc" />
+            </svg>
+        </div>
+    </header>
+
+
+    <section class="search-section">
+        <div class="container">
+            <div class="search-wrapper">
+                <div class="search-bar" id="searchBar">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search bridges or select a category..."
+                        autocomplete="off">
+                    <button class="filter-btn" id="filterBtn" aria-label="Filter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 6h16M6 12h12M8 18h8" />
+                        </svg>
+                        <span>Filters</span>
+                    </button>
+                </div>
+
+
+                <div class="dropdown" id="dropdown">
+                    <p class="dropdown-label">Browse by Category</p>
+                    <ul class="dropdown-list">
+                        <li class="dropdown-item" data-category="oldest">
+                            <span class="dropdown-icon">🏛️</span>
+                            <div>
+                                <strong>Oldest Bridges</strong>
+                                <small>Ancient structures that stood the test of time</small>
+                            </div>
+                        </li>
+                        <li class="dropdown-item" data-category="tallest">
+                            <span class="dropdown-icon">🏔️</span>
+                            <div>
+                                <strong>Tallest Bridges</strong>
+                                <small>Sky-high engineering achievements</small>
+                            </div>
+                        </li>
+                        <li class="dropdown-item" data-category="longest">
+                            <span class="dropdown-icon">🌉</span>
+                            <div>
+                                <strong>Longest Bridges</strong>
+                                <small>Spanning incredible distances</small>
+                            </div>
+                        </li>
+                        <li class="dropdown-item" data-category="smallest">
+                            <span class="dropdown-icon">🌿</span>
+                            <div>
+                                <strong>smallest Bridges</strong>
+                                <small>Charming and compact crossings</small>
+                            </div>
+                        </li>
+                        <li class="dropdown-item" data-category="famous">
+                            <span class="dropdown-icon">⭐</span>
+                            <div>
+                                <strong>Famous Bridges</strong>
+                                <small>Iconic landmarks known worldwide</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-text">
+                    <h2>The Art & Science of Bridge Building</h2>
+                    <p>
+                        Bridges are among humanity's greatest achievements in engineering and architecture.
+                        For thousands of years, civilizations have built bridges to overcome natural obstacles
+                        — rivers, valleys, and gorges — transforming isolated communities into connected societies.
+                    </p>
+                    <p>
+                        From the ancient Roman aqueducts that still stand today, to the breathtaking suspension
+                        bridges of the modern era, each bridge tells a story of innovation, ambition, and the
+                        relentless human desire to connect. Today, bridges serve not only as vital transportation
+                        links but also as iconic symbols of the cities and nations they grace.
+                    </p>
+                </div>
+                <div class="info-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">1.2M+</span>
+                        <span class="stat-label">Bridges Worldwide</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">164 km</span>
+                        <span class="stat-label">Longest Bridge</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">343 m</span>
+                        <span class="stat-label">Tallest Bridge</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3,000+</span>
+                        <span class="stat-label">Years of History</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="filter-indicator container" id="filterIndicator" style="display:none;">
+        <div class="filter-indicator-inner">
+            <span id="filterLabel"></span>
+            <button class="clear-filter" id="clearFilter">✕ Clear</button>
+        </div>
+    </section>
+
+
+    <section class="cards-section">
+        <div class="container">
+            <div class="section-header" id="sectionHeader">
+                <h2>Featured Bridges</h2>
+                <p>Select a category above to explore different types of bridges</p>
+            </div>
+            <div class="cards-grid" id="cardsGrid">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing Bridges. All Rights Reserved..</p>
+        </div>
+    </footer>
+    <script>
+
+
+
+        const bridgesData = {
+            oldest: [
+                {
+                    
+                    name: "Kalogeriko Bridge",
+                    country: " Greece",
+                    description: "The Kalogeriko Bridge is a historic three-arched stone bridge built in 1814 in Zagori, Greece. It is famous for its unique.",
+                    image: "./assets/6813405e8a6a10001c77343c.jpg",
+                     Completed: 1814 [1, 15]
+                },
+                {
+                    name: "Alcántara Bridge",
+                    country: "Spain",
+                    description: "The Alcántara Bridge is a 1,900-year-old Roman stone bridge in Spain. Built without mortar, it is famous for its six massive arches and central triumphal arch..",
+                    image: "./assets/PUENTE-DE-ALCANTARA-С (1).jpg",
+                    Completed: "106"
+                },
+                {
+                    name: " Eurymedon Bridge",
+                    country: "Turkey",
+                    description: "The Eurymedon Bridge is a historic zigzag-shaped stone bridge in Antalya, Turkey. Rebuilt by the Seljuk Turks in the 13th century on Roman foundations, it is famous for its unique bent design across the river. [4, 5, 12, 13].",
+                    image: "./assets/gettyimages-459029473.jpg",
+                    Completed: "1219–1236 "
+                },
+                {
+                    name: "Stari Most",
+                    country: "Bosnia and Herzegovina",
+                    description: "The Stari Most is a historic Ottoman stone bridge in Mostar, Bosnia. It is famous for its high arch from which divers jump into the river and is a protected UNESCO site..",
+                    image: "./assets/maxresdefault.jpg",
+                    Completed: "1566"
+                },
+                {
+                    name: " Pont Neuf Bridge",
+                    country: "France",
+                    description: "The world's oldest open-spandrel stone segmental arch bridge, built during the Sui dynasty around 605 AD. It spans 50 meters over the Xiao River in Hebei province.",
+                    image: "./assets/pont-neuf-oldest-bridge-over-seine-river-paris-france-434713163 (1).webp",
+                    Completed: "1607"
+                },
+                {
+                    name: "Çifte Köprü",
+                    country: "Turkey",
+                    description: "A medieval stone arch bridge over the Arno River in Florence, first built in Roman times and rebuilt in 1345. Famous for the shops built along it, a common practice in the medieval era.",
+                    image: "./assets/1876956-worlds-oldest-bridge.avif",
+                    Completed: "1701–1800"
+                }
+            ],
+
+            tallest: [
+                {
+                    name: " Millau Viaduct",
+                    country: " France (Southern France)",
+                    description: " The Millau Viaduct is a world-famous engineering marvel located in Southern France [1, 5, 8]. Completed on December 14, 2004, it remains the tallest bridge in the world [1, 3, 4]. .",
+                    image: "./assets/ViaducdeMillau.jpg",
+                    Completed: "2004"
+                },
+                {
+                    name: "Huajiang Grand Canyon Bridge ",
+                    country: "China",
+                    description: "The Huajiang Grand Canyon Bridge is a groundbreaking engineering feat located in Guizhou, China. It officially opened to traffic on September 28, 2025 [2, 10].",
+                    image: "./assets/images.jpg",
+                    Completed: " 2025 "
+                },
+                {
+                     name: "Beipanjiang Bridge",
+                    country: "China",
+                    description: "The Beipanjiang Bridge (also known as the Duge Bridge) is an engineering marvel located in China. It spans the Beipan River canyon, connecting the mountainous provinces of Guizhou and Yunnan.",
+                    image: "./assets/images (1).jpg",
+                    Completed: " 2016", 
+                },
+                {
+                    name: "Huajiang Canyon Bridge",
+                    country: "China",
+                    description: "The Huajiang Grand Canyon Bridge is the world's highest bridge, located in the Guizhou Province of China [2, 4, 11].",
+                    image: "./assets/Worlds-Tallest-Bridge-Opens-in-China-with-Glass-Walled-Sky-Cafe-Li-Yunfeng-VCG-via-Getty-03.webp",
+                    Completed: " 2025"
+                },
+                {
+                    name: "Huajiang Grand Canyon Bridg",
+                    country: "China (Guizhou province )",
+                    description: "A suspension bridge in Hubei province with a deck 496 meters above the Sidu River valley. When completed in 2009, it was the highest bridge in the world.",
+                    image: "./assets/huajianga.jpg",
+                    Completed: "2025"
+                },
+                {
+                    name: "Sunshine Skyway Bridge.",
+                    country: "USA",
+                    description: "A famous cable-stayed bridge [2, 15] in Tampa Bay [6, 12] that is over 4 miles long [1, 15] and features iconic yellow cables [14, 17].",
+                    image: "./assets/tallest-bridge-scaled.webp",
+                    Completed: "1987"
+                }
+            ],
+
+            longest: [
+                {
+                    name: "Donghai Bridge.",
+                    country: "China",
+                    description: "The Donghai Bridge in China is an engineering masterpiece that stretches 32.5 kilometers (20.2 miles) across the East China Sea. [2, 3].",
+                    image: "./assets/Changhua-Kaohsiung-Viaduct (1).webp",
+                    Completed: " 2005 "
+                },
+                {
+                    name: " Lake Pontchartrain Causeway",
+                    country: "United States (Louisiana)",
+                    description: "The Lake Pontchartrain Causeway in the USA is the world's longest continuous bridge over water, spanning 23.87 miles. [2, 7].",
+                    image: "./assets/Lake-Pontchartrain-Causeway-1.webp",
+                     Completed: " 1969. "
+                },
+                {
+                    name: "Hong Kong-Zhuhai-Macao Bridge",
+                    country: "china",
+                    description: "It is the world's longest sea-crossing project, stretching 55 kilometers (34 miles) to connect Hong Kong, Zhuhai, and Macao in China.",
+                    image: "./assets/1.png",
+                    Completed: " 2018."
+                },
+                {
+                    name: "Jiaozhou Bay Bridge ",
+                    country: "China (located in Qingdao, Shandong Province).",
+                    description: " This 26.7-kilometer roadway bridge links Qingdao's urban center to Huangdao District, significantly cutting travel time across the bay.",
+                    image: "./assets/1-Qingdao_120002.webp",
+                    Completed: " 2011."
+                },
+                {
+                    name: "Akashi Kaikyo Bridge",
+                    country: "Japan .",
+                    description: "The image features the Akashi Kaikyo Bridge (明石海峡大橋, Akashi Kaikyō Ōhashi), a monumental suspension bridge located in Japan. It is often referred to by its popular nickname, the Pearl Bridge.",
+                   img: "./assets/Akashi-Kaikyo_Bridge_Japan.jpg.",
+                  Completed: " 1998.",
+                },
+                {
+                    name: " Sutong Yangtze River Bridge",
+                    country: "china",
+                    description: "The Sutong Yangtze River Bridge is a major cable-stayed bridge in China, connecting the cities of Nantong and Changshu (near Suzhou) in Jiangsu Province.",
+                    image: "./assets/bridge.avif",
+                    Completed: " 2008"
+                }
+            ],
+
+            smallest: [
+                {
+                    name: " Somerset Bridge",
+                    country: "Bermuda North Atlantic Ocean",
+                    description: " Somerset Bridge is in Bermuda and was originally built in 1620 [1.1]. It is famous as the world's smallest working drawbridge, with a tiny hand-opened gap for sailboat masts [1.2]..",
+                    image: "./assets/images (2).jpg",
+                    Completed: "1620 "
+                },
+                {
+                    name: "Somerset Bridge",
+                    country: " Bermuda (Somerset Village)",
+                     description: "Somerset Bridge is the world’s smallest drawbridge, located in Bermuda. It was completed in 1620 and connects Somerset Island to the mainland. The bridge can open slightly to allow small boats to pass. It is famous for its historic importance and beautiful sea location.",
+                    image: "./assets/p064h4y6.jpg",
+                    Completed: "1620"
+                },
+                {
+                    name: "Suspension Footbridge (Swinging Bridge",
+                    country: "United States",
+                    description: "This suspension footbridge is located in the United States. It is built for pedestrians and supported by strong steel cables. The bridge is used to cross a small river and is known for its simple and beautiful design.",
+                    image: "./assets/attachment-Untitled-design-2025-02-19T115439.912.webp",
+                    Completed: "1900s (approx)"
+                },
+                {
+                    name: "Somerset Bridge",
+                    country: "Bermuda",
+                    description: "Somerset Bridge is the world’s smallest drawbridge, completed in 1620 in Bermuda. It connects Somerset Island to the mainland and can open to let small boats pass underneath. It is famous for its historic design.",
+                    image: "./assets/6813405e8a6a10001c77343c.jpg",
+                    Completed: "1620"
+                },
+                {
+                    name: "Zavikon Island Bridge",
+                    country: "Canada and United States",
+                    description: "Zavikon Island Bridge is a small footbridge connecting two islands between Canada and the United States. It was built around 1900 and is famous as the world’s shortest international bridge.",
+                    image: "./assets/zavikon-1024x683.jpg.",
+                    Completed: "Around 1900"
+                },
+                {
+                    name: "Wooden Footbridge",
+                    country: "United Kingdom",
+                    description: "This wooden footbridge is located in the United Kingdom. It is built for pedestrians to cross a small stream. The bridge is known for its natural beauty and simple wooden design.",
+                    image: "./assets/qwk0mqv7i476abeaa1a24363531ba_14717098_rO8Zt.jpg.",
+                   Completed: "Around 1900–1950"
+                }
+            ],
+
+            famous: [
+                {
+                    name: "Tower Bridge.",
+                    country: "United Kingdom",
+                    description: "Tower Bridge is a famous historic bridge in London, completed in 1894. It can open in the middle to allow ships to pass. The bridge is known for its beautiful design and twin towers.",
+                    image: "./assets/london-tower-bridge-2.jpg",
+                    Completed: "1894"
+                },
+                {
+                    name: "Golden Gate Bridge",
+                    country: " United States of America (USA) ",
+                    description: "The Golden Gate Bridge is one of the world's most famous suspension bridges, located in San Francisco, California, USA.",
+                    image: "./assets/170221140207-golden-gate-bridge.jpg",
+                    Completed: " 1937"
+                },
+                {
+                    name: "Tower Bridge.",
+                    country: "United Kingdom (London, England).",
+                    description: "The Tower Bridge is an iconic symbol of London, UK, completed in 1894. It is famous for its twin Gothic towers and its ability to lift the central roadway for large ships to pass. [1, 8, 9].",
+                    image: "./assets/famous-bridge-world-tower-bridge-london-uk.avif",
+                    Completed: "1894 "
+                },
+                {
+                    name: " Golden Bridge (Hand Bridge).",
+                    country: "Vietnam",
+                    description: "  The Golden Bridge is a 150-meter long pedestrian walkway in Vietnam, famous for being held up by two giant stone hands. It is located 1,400 meters above sea level, offering breathtaking mountain views.",
+                    image: "./assets/5b6209ecbda1c72a008b4576.webp",
+                    Completed: " 2018"
+                },
+                {
+                    name: "Forth Bridge (Forth Rail Bridge).",
+                    country: "Scotland, United Kingdom",
+                    description: "The Forth Bridge is an iconic cantilever railway bridge and a UNESCO World Heritage Site. Completed in 1890, it was the world’s first major steel structure and remains one of the greatest engineering feats of the Victorian era. It spans approximately 2.5 kilometers across the Firth of Forth estuary.",
+                    image: "./assets/edinburgh-july-5-2015file-photo-provided-by-318299.jpg",
+                    Completed: " 1890 "
+                },
+                {
+                    name: " Sydney Harbour Bridge",
+                    country: "Australia",
+                    description: "The oldest of four bridges spanning the Grand Canal in Venice. Designed by Antonio da Ponte and completed in 1591, it remains one of Venice's most visited architectural icons.",
+                    image: "./assets/Sydney-Harbour-bridge-720x412.jpg",
+                    Completed: "1932"
+                }
+            ]
+        };
+
+        const categoryNames = {
+            oldest: "Oldest Bridges",
+            tallest: "Tallest Bridges",
+            longest: "Longest Bridges",
+            smallest: "Smallest Bridges",
+            famous: "Famous Bridges"
+        };
+
+        const searchInput = document.getElementById('searchInput');
+        const filterBtn = document.getElementById('filterBtn');
+        const dropdown = document.getElementById('dropdown');
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        const cardsGrid = document.getElementById('cardsGrid');
+        const sectionHeader = document.getElementById('sectionHeader');
+        const filterIndicator = document.getElementById('filterIndicator');
+        const filterLabel = document.getElementById('filterLabel');
+        const clearFilterBtn = document.getElementById('clearFilter');
+
+        let currentCategory = 'famous';
+        let dropdownOpen = false;
+
+
+        function toggleDropdown(forceState) {
+            dropdownOpen = forceState !== undefined ? forceState : !dropdownOpen;
+            dropdown.classList.toggle('open', dropdownOpen);
+            document.querySelector('.search-bar').classList.toggle('active', dropdownOpen);
+        }
+
+        filterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        searchInput.addEventListener('focus', () => {
+            toggleDropdown(true);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-wrapper')) {
+                toggleDropdown(false);
+            }
+        });
+
+        dropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const category = item.dataset.category;
+
+                dropdownItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+
+                currentCategory = category;
+                renderCards(category);
+
+                searchInput.value = categoryNames[category];
+
+                filterIndicator.style.display = 'block';
+                filterLabel.textContent = `Showing: ${categoryNames[category]}`;
+
+
+                setTimeout(() => toggleDropdown(false), 200);
+            });
+        });
+
+        clearFilterBtn.addEventListener('click', () => {
+            currentCategory = 'famous';
+            searchInput.value = '';
+            filterIndicator.style.display = 'none';
+            dropdownItems.forEach(i => i.classList.remove('selected'));
+            renderCards('famous');
+            updateSectionHeader('Featured Bridges', 'Select a category above to explore different types of bridges');
+        });
+
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query === '') {
+
+                renderCards(currentCategory);
+                return;
+            }
+
+            let results = [];
+            Object.keys(bridgesData).forEach(cat => {
+                bridgesData[cat].forEach(bridge => {
+                    if (
+                        bridge.name.toLowerCase().includes(query) ||
+                        bridge.country.toLowerCase().includes(query) ||
+                        bridge.description.toLowerCase().includes(query)
+                    ) {
+                        results.push({ ...bridge, category: cat });
+                    }
+                });
+            });
+
+            const seen = new Set();
+            results = results.filter(b => {
+                if (seen.has(b.name)) return false;
+                seen.add(b.name);
+                return true;
+            });
+
+            renderCardsFromArray(results);
+            updateSectionHeader(
+                `Search Results`,
+                results.length > 0
+                    ? `Found ${results.length} bridge${results.length > 1 ? 's' : ''} matching "${e.target.value}"`
+                    : `No bridges found for "${e.target.value}"`
+            );
+        });
+
+        function renderCards(category) {
+            const bridges = bridgesData[category];
+            if (!bridges) return;
+
+            updateSectionHeader(
+                categoryNames[category],
+                `Discover ${bridges.length} remarkable ${categoryNames[category].toLowerCase()} from around the world`
+            );
+
+            renderCardsFromArray(bridges.map(b => ({ ...b, category })));
+        }
+
+
+        function renderCardsFromArray(bridges) {
+
+            cardsGrid.innerHTML = '';
+
+            if (bridges.length === 0) {
+                cardsGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+        <p style="font-size: 2.5rem; margin-bottom: 12px;">🌉</p>
+        <p style="font-size: 1.1rem; font-weight: 500;">No bridges found</p>
+        <p style="font-size: 0.9rem;">Try a different search term or category</p>
+      </div>
+    `;
+                return;
+            }
+
+            bridges.forEach(bridge => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+      <div class="card-image-wrapper">
+        <img 
+          class="card-image" 
+          src="${bridge.image}" 
+          alt="${bridge.name}"
+          loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&h=400&fit=crop'"
+        >
+        <span class="card-badge">${categoryNames[bridge.category] || 'Bridge'}</span>
+      </div>
+      <div class="card-body">
+        <span class="card-country">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          ${bridge.country}
+        </span>
+        <h3 class="card-name">${bridge.name}</h3>
+        <p class="card-desc">${bridge.description}</p>
+        <div class="card-footer">
+          <button class="read-more-btn" onclick="alert('Learn more about ${bridge.name} coming soon!')">
+            Read More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <span class="card-meta">${bridge.meta || ''}</span>
+        </div>
+      </div>
+    `;
+                cardsGrid.appendChild(card);
+            });
+        }
+
+        function updateSectionHeader(title, subtitle) {
+            sectionHeader.innerHTML = `
+    <h2>${title}</h2>
+    <p>${subtitle}</p>
+  `;
+        }
+
+        document.addEventListener('keydown', (e) => {
+
+            if (e.key === 'Escape') {
+                toggleDropdown(false);
+                searchInput.blur();
+            }
+        });
+
+        renderCards('famous');
+
+
+    </script>
 </body>
 
 </html>
