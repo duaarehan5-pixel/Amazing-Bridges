@@ -461,7 +461,7 @@
         font-family: 'Playfair Display', serif;
         font-size: clamp(1.5rem, 3vw, 2rem);
         font-weight: 700;
-        color: var(--text-dark);
+        color: white !important;
         margin-bottom: 8px;
     }
 
@@ -595,7 +595,7 @@
         line-height: 1.7;
         margin-bottom: 18px;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        /* -webkit-line-clamp: 3; */
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -644,13 +644,6 @@
         font-weight: 500;
     }
 
-    .footer {
-        background: var(--text-dark);
-        color: rgba(255, 255, 255, 0.5);
-        text-align: center;
-        padding: 30px 24px;
-        font-size: 0.85rem;
-    }
 
 
 
@@ -719,30 +712,205 @@
             grid-template-columns: 1fr;
         }
     }
+    /* ===== BODY ===== */
+body{
+    font-family:'Inter',sans-serif;
+    background:#0f2027;
+    color:white;
+}
+
+/* ===== HOME STYLE NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 60px;
+    z-index:1000;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:1.7rem;
+    font-weight:600;
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    position:relative;
+    transition:0.3s;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#38bdf8;
+    left:0;
+    bottom:-6px;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ===== HERO SECTION (HOME STYLE) ===== */
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
+}
+
+.hero-content h1{
+    font-size:3.5rem;
+    font-family:'Playfair Display',serif;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+    opacity:0.9;
+}
+
+.hero-btn{
+    padding:12px 30px;
+    background:#38bdf8;
+    border:none;
+    color:white;
+    font-weight:600;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    background:#0ea5e9;
+    transform:scale(1.05);
+}
+
+/* ===== FOOTER ===== */
+footer{
+background:#0b141a;
+padding:50px 80px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+footer h3{
+margin-bottom:15px;
+}
+
+footer p, footer a{
+color:var(--text-muted);
+font-size:0.9rem;
+text-decoration:none;
+display:block;
+margin-bottom:8px;
+}
+
+footer a:hover{
+color:var(--accent);
+}
+
+.footer-bottom{
+text-align:center;
+padding:20px;
+background:#081015;
+color:var(--text-muted);
+font-size:0.8rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+header{padding:18px 20px;}
+.section{padding:60px 20px;}
+footer{padding:40px 20px;}
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+    color:white;
+}
+
+/* Mobile View */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,0.95);
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+        padding:30px 0;
+        display:none;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}
+
 </style>
 
 <body>
+  <nav class="navbar">
+    <div class="logo">Amazing Bridges</div>
 
+    <div class="menu-toggle" id="menu-toggle">
+        ☰
+    </div>
 
-    <header class="header">
-        <div class="header-overlay"></div>
-        <div class="header-content">
-            <p class="header-tag">Architecture & Engineering</p>
-            <h1 class="header-title">Categories Bridges</h1>
-            <p class="header-subtitle">
-                Bridges are important structures that connect two different places. They help people and vehicles cross
-                rivers, roads, and valleys safely. Bridges make travel easier and save time. They also show human
-                engineering skill and creativity.
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bridges.html">Bridges</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
 
-            </p>
-        </div>
+  <!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>World’s Most Amazing Bridges</h1>
+        <p>Discover engineering masterpieces that connect cities and cultures.</p>
+        <button class="hero-btn">Explore More</button>
+    </div>
+</section>
 
-        <div class="header-wave">
-            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                <path d="M0,64 C360,120 1080,0 1440,64 L1440,120 L0,120 Z" fill="#f8fafc" />
-            </svg>
-        </div>
-    </header>
 
 
     <section class="search-section">
@@ -813,7 +981,7 @@
         <div class="container">
             <div class="info-grid">
                 <div class="info-text">
-                    <h2>The Art & Science of Bridge Building</h2>
+                    <h2 style="color: white;">The Art & Science of Bridge Building</h2>
                     <p>
                         Bridges are among humanity's greatest achievements in engineering and architecture.
                         For thousands of years, civilizations have built bridges to overcome natural obstacles
@@ -868,11 +1036,30 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Amazing Bridges. All Rights Reserved..</p>
-        </div>
-    </footer>
+    <footer>
+<div>
+<h3>About</h3>
+<p>Amazing Bridges is a showcase of world engineering wonders and iconic structures.</p>
+</div>
+
+<div>
+<h3>Quick Links</h3>
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="bridges.html">Bridges</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>Email: info@amazingbridges.com</p>
+<p>Phone: +92 300 1234567</p>
+</div>
+</footer>
+
+<div class="footer-bottom">
+© 2026 Amazing Bridges. All rights reserved.
+</div>
     <script>
 
 
@@ -1305,7 +1492,14 @@
 
         renderCards('famous');
 
+        /* MOBILE MENU TOGGLE */
 
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+toggle.addEventListener("click", ()=>{
+    navLinks.classList.toggle("active");
+});
     </script>
 </body>
 

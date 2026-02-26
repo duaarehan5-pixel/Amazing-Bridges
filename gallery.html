@@ -1,34 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazing Bridges</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridges Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== ROOT ===== */
+:root{
+--primary:#0f2a44;
+--accent:#38bdf8;
+--bg-dark:#0f2027;
+--text-light:#ffffff;
+--text-muted:#9ca3af;
+--radius:14px;
+--transition:0.3s ease;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Inter',sans-serif;
+background:var(--bg-dark);
+color:white;
+}
+
+/* ===== HOME STYLE NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 60px;
+    z-index:1000;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:1.7rem;
+    font-weight:600;
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    position:relative;
+    transition:0.3s;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#38bdf8;
+    left:0;
+    bottom:-6px;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ===== HERO SECTION (HOME STYLE) ===== */
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
+}
+
+.hero-content h1{
+    font-size:3.5rem;
+    font-family:'Playfair Display',serif;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+    opacity:0.9;
+}
+
+.hero-btn{
+    padding:12px 30px;
+    background:#38bdf8;
+    border:none;
+    color:white;
+    font-weight:600;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    background:#0ea5e9;
+    transform:scale(1.05);
+}
+
+/* ===== SECTION ===== */
+.section{
+padding:80px 80px;
+}
+
+.section-title{
+text-align:center;
+font-family:'Playfair Display',serif;
+font-size:2.5rem;
+margin-bottom:50px;
+}
+
+/* ===== GALLERY GRID ===== */
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border-radius:var(--radius);
+overflow:hidden;
+transition:var(--transition);
+cursor:pointer;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 30px rgba(0,0,0,0.5);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card-body{
+padding:20px;
+}
+
+.card-body h3{
+font-family:'Playfair Display',serif;
+margin-bottom:10px;
+}
+
+.card-body p{
+color:var(--text-muted);
+font-size:0.9rem;
+line-height:1.5;
+}
+
+/* ===== INFO SECTION ===== */
+.info-section{
+background:#111c24;
+text-align:center;
+padding:80px 80px;
+}
+
+.info-section h2{
+font-family:'Playfair Display',serif;
+font-size:2.2rem;
+margin-bottom:20px;
+}
+
+.info-section p{
+max-width:800px;
+margin:auto;
+color:var(--text-muted);
+}
+
+/* ===== CTA ===== */
+.cta{
+background:linear-gradient(45deg,#0f2a44,#1b3b5a);
+text-align:center;
+padding:70px 20px;
+}
+
+.cta h2{
+font-family:'Playfair Display',serif;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.cta button{
+padding:14px 30px;
+border:none;
+border-radius:30px;
+background:var(--accent);
+color:black;
+font-weight:600;
+cursor:pointer;
+transition:var(--transition);
+}
+
+.cta button:hover{
+transform:scale(1.05);
+}
+
+/* ===== FOOTER ===== */
+footer{
+background:#0b141a;
+padding:50px 80px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+footer h3{
+margin-bottom:15px;
+}
+
+footer p, footer a{
+color:var(--text-muted);
+font-size:0.9rem;
+text-decoration:none;
+display:block;
+margin-bottom:8px;
+}
+
+footer a:hover{
+color:var(--accent);
+}
+
+.footer-bottom{
+text-align:center;
+padding:20px;
+background:#081015;
+color:var(--text-muted);
+font-size:0.8rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+header{padding:18px 20px;}
+.section{padding:60px 20px;}
+footer{padding:40px 20px;}
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+    color:white;
+}
+
+/* Mobile View */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,0.95);
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+        padding:30px 0;
+        display:none;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}
+</style>
 </head>
-
 <body>
-    <header>
-        <div class="logo">
-            <img src="assets/images.png" alt="Logo">
-            <h1>Amazing Bridges</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="bridges.html">bridges</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-       <footer>
-        <p>&copy; 2026 Amazing Bridges. All Rights Reserved.</p>
-    </footer>
+<nav class="navbar">
+    <div class="logo">Amazing Bridges</div>
 
-    <script src="script.js"></script>
+    <div class="menu-toggle" id="menu-toggle">
+        ☰
+    </div>
+
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bridges.html">Bridges</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>World Bridges Gallery</h1>
+        <p style="width: 500px; padding-left: 60px;">Explore some of the most breathtaking bridges ever built — engineering masterpieces that connect lands, cultures, and dreams.</p>
+    </div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Featured Bridges</h2>
+<div class="gallery-grid">
+
+<!-- 12 Cards -->
+<script>
+const bridges = [
+{
+name:"Millau Viaduct",
+image:"london-tower-bridge-2.jpg",
+desc:"Located in France, completed in 2004, it is the tallest bridge in the world with breathtaking cable-stayed design."
+},
+{
+name:"Tower Bridge",
+image:"Worlds-Tallest-Bridge-Opens-in-China-with-Glass-Walled-Sky-Cafe-Li-Yunfeng-VCG-via-Getty-03.webp",
+desc:"An iconic London landmark opened in 1894, famous for its twin towers and bascule mechanism."
+},
+{
+name:"Akashi Kaikyō Bridge",
+image:"Sydney-Harbour-bridge-720x412.jpg",
+desc:"Japan’s longest suspension bridge completed in 1998, connecting Kobe and Awaji Island."
+},
+{
+name:"Huajiang Canyon Bridge",
+image:"qwk0mqv7i476abeaa1a24363531ba_14717098_rO8Zt.jpg",
+desc:"One of China’s highest bridges spanning a deep canyon, symbolizing modern engineering brilliance."
+},
+{
+name:"Golden Gate Bridge",
+image:"pont-neuf-oldest-bridge-over-seine-river-paris-france-434713163 (1).webp",
+desc:"Opened in 1937 in San Francisco, this red suspension bridge is one of the most photographed in the world."
+},
+{
+name:"Brooklyn Bridge",
+image:"zavikon-1024x683.jpg",
+desc:"Completed in 1883, this historic New York bridge was one of the first steel-wire suspension bridges."
+},
+{
+name:"Kalogeriko Bridge",
+image:"csm_iStock-1194211034_NEU_ffd13207aa.jpg",
+desc:"Built in 1814 in Greece, this unique triple-arched stone bridge is a masterpiece of traditional design."
+},
+{
+name:"Zavikon Island Bridge",
+image:"5b6209ecbda1c72a008b4576.webp",
+desc:"A tiny wooden bridge in Canada connecting two small islands, known as one of the smallest bridges."
+},
+{
+name:"Sydney Harbour Bridge",
+image:"PUENTE-DE-ALCANTARA-С (1).jpg",
+desc:"Completed in 1932, this massive steel arch bridge is one of Australia’s most recognizable landmarks."
+},
+{
+name:"Charles Bridge",
+image:"Akashi-Kaikyo_Bridge_Japan.jpg",
+desc:"A 14th-century stone bridge in Prague decorated with historic statues and Gothic architecture."
+},
+{
+name:"Rialto Bridge",
+image:"1876956-worlds-oldest-bridge.avif",
+desc:"Venice’s oldest bridge across the Grand Canal, built in 1591 with Renaissance style architecture."
+},
+{
+name:"Banpo Bridge",
+image:"6813405e8a6a10001c77343c.jpg",
+desc:"Located in South Korea, famous for its Rainbow Fountain water show at night."
+}
+];
+
+const grid = document.querySelector(".gallery-grid");
+
+bridges.forEach(bridge=>{
+grid.innerHTML += `
+<div class="card">
+<img src="./assets/${bridge.image}" alt="${bridge.name}">
+<div class="card-body">
+<h3>${bridge.name}</h3>
+<p>${bridge.desc}</p>
+</div>
+</div>
+`;
+});
+
+/* MOBILE MENU TOGGLE */
+
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+toggle.addEventListener("click", ()=>{
+    navLinks.classList.toggle("active");
+});
+</script>
+
+</div>
+</section>
+
+<section class="info-section">
+<h2>Why Bridges Matter</h2>
+<p>
+Bridges are more than just structures of steel and stone — they symbolize connection,
+progress, and human innovation. From ancient stone arches to modern suspension marvels,
+each bridge tells a story of creativity and determination.
+</p>
+</section>
+
+<section class="cta">
+<h2>Want to Explore More Bridges?</h2>
+<button>View All Bridges</button>
+</section>
+
+<footer>
+<div>
+<h3>About</h3>
+<p>Amazing Bridges is a showcase of world engineering wonders and iconic structures.</p>
+</div>
+
+<div>
+<h3>Quick Links</h3>
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="bridges.html">Bridges</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>Email: info@amazingbridges.com</p>
+<p>Phone: +92 300 1234567</p>
+</div>
+</footer>
+
+<div class="footer-bottom">
+© 2026 Amazing Bridges. All rights reserved.
+</div>
+
 </body>
-
 </html>
